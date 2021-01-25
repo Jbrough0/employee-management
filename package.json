@@ -1,0 +1,17 @@
+{
+    "name": "employee-management-tracker",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index"
+    },
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "asciiart-logo": "^0.2.6",
+        "console.table": "^0.10.0",
+        "inquirer": "^7.0.0",
+        "mysql": "^2.17.1"
+    }
+}
