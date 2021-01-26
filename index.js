@@ -1,116 +1,111 @@
 const logo = require("asciiart-logo");
 const { prompt } = require("inquirer");
-const { exit } = require("process");
-const { inherits } = require("util");
-const db = require("./db");
+const db = require("./db/conection");
 require("console.table");
 init();
 
 function init() {
     const logoText = logo({ name: "Employee Management" }).render();
-  
     console.log(logoText);
-  
     loadMainPrompts();
-  }
-  async function loadMainPrompts() {
-    const { choice } = await prompt([
-      {
-        type: "list",
-        name: "choice",
-        message: "What is your choice?",
-        choices: [
-          {
-              name: "All Employees",
-              value: "VEIW_EMPLOYEES"
-          },
-          {
-            name: "Employees By Department",
-            value: "VEIW_EMPLOYEES_BY_DEPARTMENT"
-          },
-          {
-            name: "Veiw All Employees by Manager",
-            value: "VEIW_EMPLOYEES_BY_MANAGER"
-          },
-          {
-            name: "Add Employees",
-            value: "ADD_EMPLOYEES"
-          },
-          {
-            name: "Delete Employees",
-            value: "DELETE_EMPLOYEES"
-          },
-          {
-            name: "Update Role",
-            value: "UPDATE_ROLE"
-          },
-          {
-            name: "Update Employee Manager",
-            value: "UPDATE_EMPLOYEE_MANAGER"
-          },
-          {
-            name: "View All Roles",
-            value: "VIEW_ROLES"
-          },
-          {
-            name: "Add Role",
-            value: "ADD_ROLE"
-          },
-          {
-            name: "Delete Role",
-            value: "DELETE_ROLE"
-          },
-          {
-            name: "View All Departments",
-            value: "VIEW_DEPARTMENTS"
-          },
-          {
-            name: "Add Department",
-            value: "ADD_DEPARTMENT"
-          },
-          {
-            name: "Delete Department",
-            value: "DELETE_DEPARTMENT"
-          },
-          {
-            name: "Exit",
-            value: "EXIT"
-          }
-        ]
-      }
-    ]);
 }
-switch (choice) {
-    case "VIEW_EMPLOYEES":
-      return viewEmployees();
-    case "VIEW_EMPLOYEES_BY_DEPARTMENT":
-      return viewEmployeesByDepartment();
-    case "VIEW_EMPLOYEES_BY_MANAGER":
-      return viewEmployeesByManager();
-    case "ADD_EMPLOYEES":
-      return addEmployees();
-    case "DELETE_EMPLOYEES":
-      return deleteEmloyees();
-    case "UPDATE_ROLE":
-      return updateEmployeeRole();
-    case "UPDATE_EMPLOYEE_MANAGER":
-      return updateEmployeeManager();
-    case "VIEW_DEPARTMENTS":
-      return viewDepartments();
-    case "ADD_DEPARTMENT":
-      return addDepartment();
-    case "DELETE_DEPARTMENT":
-      return deleteDepartment();
-    case "VIEW_ROLES":
-      return viewRoles();
-    case "ADD_ROLE":
-      return addRole();
-    case "DELETE_ROLE":
-      return deleteRole();
-    default:
-      return exit();
-  }
-
+async function loadMainPrompts() {
+  const { choice } = await prompt([
+  {
+      type: "list",
+      name: "choice",
+      message: "What is your choice?",
+      choices: [
+        {
+            name: "All Employees",
+            value: "VEIW_EMPLOYEES"
+        },
+        {
+          name: "Employees By Department",
+          value: "VEIW_EMPLOYEES_BY_DEPARTMENT"
+        },
+        {
+          name: "Veiw All Employees by Manager",
+          value: "VEIW_EMPLOYEES_BY_MANAGER"
+        },
+        {
+          name: "Add Employees",
+          value: "ADD_EMPLOYEES"
+        },
+        {
+          name: "Delete Employees",
+          value: "DELETE_EMPLOYEES"
+        },
+        {
+          name: "Update Role",
+          value: "UPDATE_ROLE"
+        },
+        {
+          name: "Update Employee Manager",
+          value: "UPDATE_EMPLOYEE_MANAGER"
+        },
+        {
+          name: "View All Roles",
+          value: "VIEW_ROLES"
+        },
+        {
+          name: "Add Role",
+          value: "ADD_ROLE"
+        },
+        {
+          name: "Delete Role",
+          value: "DELETE_ROLE"
+        },
+        {
+          name: "View All Departments",
+          value: "VIEW_DEPARTMENTS"
+        },
+        {
+          name: "Add Department",
+          value: "ADD_DEPARTMENT"
+        },
+        {
+          name: "Delete Department",
+          value: "DELETE_DEPARTMENT"
+        },
+        {
+          name: "Exit",
+          value: "EXIT"
+        }
+      ]
+    }
+  ]);
+  switch (choice) {
+      case "VIEW_EMPLOYEES":
+        return viewEmployees();
+      case "VIEW_EMPLOYEES_BY_DEPARTMENT":
+        return viewEmployeesByDepartment();
+      case "VIEW_EMPLOYEES_BY_MANAGER":
+        return viewEmployeesByManager();
+      case "ADD_EMPLOYEES":
+        return addEmployees();
+      case "DELETE_EMPLOYEES":
+        return deleteEmloyees();
+      case "UPDATE_ROLE":
+        return updateEmployeeRole();
+      case "UPDATE_EMPLOYEE_MANAGER":
+        return updateEmployeeManager();
+      case "VIEW_DEPARTMENTS":
+        return viewDepartments();
+      case "ADD_DEPARTMENT":
+        return addDepartment();
+      case "DELETE_DEPARTMENT":
+        return deleteDepartment();
+      case "VIEW_ROLES":
+        return viewRoles();
+      case "ADD_ROLE":
+        return addRole();
+      case "DELETE_ROLE":
+        return deleteRole();
+      default:
+        return exit();
+    }
+}
 async function viewEmployees(){
   const Employees =await db.findAllEmployees();
 
@@ -310,7 +305,6 @@ const{managerID} = await prompt ([
   
     loadMainPrompts();
   }
-  
   async function deleteRole() {
     const roles = await db.findAllRoles();
   
@@ -429,5 +423,5 @@ const{managerID} = await prompt ([
   }
   function exit() {
     console.log("So long!");
-    process.exit();
+    process.exit;
   }
